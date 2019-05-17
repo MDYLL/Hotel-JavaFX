@@ -53,8 +53,17 @@ public class Controller implements Initializable {
         }
     }
 
+    private void checkForTommorow() {
+        if (date2.getValue().compareTo(LocalDate.now()) < -1) {
+            date2.setValue(LocalDate.now().plusDays(1));
+            String d = date2.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            dateOff.setText(d);
+        }
+    }
+
     @FXML
     private void setDateOn() {
+        checkForToday();
         String d = date1.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         dateOn.setText(d);
         if (dateOff.getText().length()>0) {
@@ -72,6 +81,7 @@ public class Controller implements Initializable {
 
     @FXML
     private void setDateOff() {
+        checkForTommorow();
         String d = date2.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         dateOff.setText(d);
         if (dateOn.getText().length()>0) {

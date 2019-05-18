@@ -93,8 +93,8 @@ public class Controller implements Initializable {
     @FXML
     private void check() {
         if (dateOn.getText().length() > 0 && dateOff.getText().length() > 0) {
-            int days = date2.getValue().compareTo(date1.getValue());
-            int bill = days * price.get(chooseRoom.getValue());
+            long days = date2.getValue().toEpochDay()-date1.getValue().toEpochDay();
+            long bill = days * price.get(chooseRoom.getValue());
             total.setText(String.valueOf(bill));
         }
     }
